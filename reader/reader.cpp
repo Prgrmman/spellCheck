@@ -1,5 +1,6 @@
-#include "reader.hpp"
+#include <set>
 #include <stdlib.h>
+#include "reader.hpp"
 #define isascii(c)  ((c & ~0x7F) == 0)
 using namespace std;
 
@@ -63,6 +64,8 @@ static bool containsNumber(const string& word)
 list<string> getWords(const string& filename, int mode)
 {
     list<string> words;
+    list<string> unique_words;
+    set<string> word_set;
     fstream file;
     file.open(filename);
     if (!file.is_open()){
@@ -74,11 +77,19 @@ list<string> getWords(const string& filename, int mode)
         if (line.length() > 0){
             list<string> lineWords = processWords(line, mode);
             lineWords.remove_if(containsNumber);
+            for (string word: lineWords)
+                word_set.insert(word);
             words.insert(words.end(), lineWords.begin(), lineWords.end());
         }
     }
     file.close();
-    return words;
+    if (mode == DICT_MODE){
+        for(string word: word_set)
+            unique_words.push_back(word);
+        return unique_words;
+    }
+    else
+        return words;
 }
 
 
