@@ -9,7 +9,7 @@
 #include "../freq/freq.hpp"
 
 static std::vector<std::unordered_map<std::string,std::string> > dictionary;
-//static std::vector<std::string> candidates;
+// static std::vector<std::string> candidates;
 static int maxlen;
 
 void createDict(std::string filename){
@@ -59,7 +59,7 @@ bool findWord(std::string word){
 }
 
 void withinTwoEdits(std::string word){
-    //if iteration of unordered maps possible, can still do this part easily
+    // if iteration of unordered maps possible, can still do this part easily
     bool found = findWord(word);
     if(found){
         std::cout << word << " exists in dictionary" << std::endl;
