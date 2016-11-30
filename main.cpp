@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 	createDict(dictName);
 	correction = findCorrection("aaron");
 	cout << correction << endl;
-	correction = findCorrection("asdbjksa");
+	correction = findCorrection("aaab");
 	cout << correction << endl;
     return 0;
 }

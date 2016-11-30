@@ -59,7 +59,7 @@ bool findWord(std::string word){
 
 std::list<std::string> withinTwoEdits(std::string word){
 	//if iteration of unordered maps possible, can still do this part easily
-	int numRowCheck;
+	int i, numRowStart, numRowEnd;
 	std::list<std::string> candidates;
 	int wordLength = word.length();
 	bool found = findWord(word);
@@ -70,15 +70,26 @@ std::list<std::string> withinTwoEdits(std::string word){
 	else{
 		//Design chiace here
 		if(wordLength <= 2){
-			
+			numRowStart = 1;
+			numRowEnd = wordLength+2;
 		}
 		else if(wordLength >= maxlen-1){
-			
+			numRowStart = wordLength-2;
+			numRowEnd = maxlen;
 		}
 		else{
-			
+			numRowStart = wordLength-2;
+			numRowEnd = wordLength+2;
 		}
-		candidates.push_back("hi");
+		for(i=numRowStart; i<numRowEnd; i++){
+			if(dictionary.at(i-1).size() != 0){	
+				for(auto it : dictionary.at(i-1)){					
+					if(editDistance(word,it.first) <= 2){	
+						candidates.push_back(it.first);
+					}
+				}
+			}
+		}
 		return candidates;
 	}
 }
@@ -86,6 +97,10 @@ std::list<std::string> withinTwoEdits(std::string word){
 std::string findCorrection(std::string word){
 	//std::string correction;
 	std::list<std::string> candidates;
-	candidates = withinTwoEdits(word);
-	return candidates.front();
+	if(word.length() <= maxlen){
+		candidates = withinTwoEdits(word);
+		//std::cout << candidates.size() << std::endl;
+		return candidates.front();
+	}
+	return "Not found";
 }
