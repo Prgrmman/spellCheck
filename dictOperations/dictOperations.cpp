@@ -36,7 +36,7 @@ void createDict(std::string filename){
 
     for(i=0; i<words.size(); i++){
         dictionary.at(words.at(i).length()-1).insert(make_pair(words.at(i), words.at(i)));
-    }        
+    }
 
     /*for(i=0; i<maxlen; i++){
       if(dictionary.at(i).size() != 0){
@@ -53,7 +53,7 @@ bool findWord(std::string word){
         std::unordered_map<std::string,std::string>::iterator it;
         if ((it = dictionary.at(word.length()-1).find(word)) != dictionary.at(word.length()-1).end()){// if the word is not the map
             return true;
-        } 
+        }
     }
     return false;
 }
