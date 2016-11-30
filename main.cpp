@@ -22,9 +22,5 @@ int main(int argc, char** argv)
 	correction = findCorrection("aaab");
 	cout << correction << endl;
 
-    cout << "Test of Text\n";
-    list<string> stuff = text.getDictionary();
-    for(string s : stuff)
-        cout << s << endl;
     return 0;
 }
