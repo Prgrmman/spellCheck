@@ -3,9 +3,15 @@
 
 using namespace std;
 
+#include <iostream>
+#include "libs.hpp"
+
+using namespace std;
+
 int main(int argc, char** argv)
 {
-    cout << "Testing" << endl;
+    string correction;
+	cout << "Testing" << endl;
     list<string> words = getWords("sample.txt", TEXT_MODE);
     Text text(words);
     cout << "freq of " << argv[1] <<" " << text.getProportion(argv[1]) << endl;
@@ -16,7 +22,9 @@ int main(int argc, char** argv)
 	string dictName = argv[3];
 	//cout << "Current dictionary contents:" << endl;
 	createDict(dictName);
-	withinTwoEdits("aaron");
-	withinTwoEdits("asdbjksa");
+	correction = findCorrection("aaron");
+	cout << correction << endl;
+	correction = findCorrection("asdbjksa");
+	cout << correction << endl;
     return 0;
 }

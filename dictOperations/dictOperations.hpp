@@ -9,7 +9,7 @@
 #define DICTOPERATIONS_H
 #include <string>
 
-void createDict(std::string filename);
-void withinTwoEdits(std::string word);
+void createDict(std::string word);
+std::string findCorrection(std::string word);
 
 #endif
