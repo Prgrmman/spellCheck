@@ -13,8 +13,5 @@
 #include <sstream>
 #include <iterator>
 
-#define DICT_MODE 0
-#define TEXT_MODE 1
-
-std::list<std::string> getWords(const std::string& filename, int mode);
+std::list<std::string> getWords(const std::string& filename);
 #endif

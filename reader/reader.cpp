@@ -39,12 +39,10 @@ static list<string> split(const string& s, const string& delimits)
 /*
  * Process line based on mode
  */
-static list<string> processWords(const string& s, int mode)
+static list<string> processWords(const string& s)
 {
     string temp = s;
-    if (mode == TEXT_MODE){
-        temp = strip_punct(temp, "\",.?!;:()\r_#*[]/\\");  
-    }
+    temp = strip_punct(temp, "\",.?!;:()\r_#*[]/\\");  
     return split(temp, " \n\t");
 }
 /*
@@ -61,11 +59,9 @@ static bool containsNumber(const string& word)
 /*
  * returns list of words from file
  */
-list<string> getWords(const string& filename, int mode)
+list<string> getWords(const string& filename)
 {
     list<string> words;
-    list<string> unique_words;
-    set<string> word_set;
     fstream file;
     file.open(filename);
     if (!file.is_open()){
@@ -75,21 +71,13 @@ list<string> getWords(const string& filename, int mode)
     string line;
     while(getline(file, line)){
         if (line.length() > 0){
-            list<string> lineWords = processWords(line, mode);
+            list<string> lineWords = processWords(line);
             lineWords.remove_if(containsNumber);
-            for (string word: lineWords)
-                word_set.insert(word);
             words.insert(words.end(), lineWords.begin(), lineWords.end());
         }
     }
     file.close();
-    if (mode == DICT_MODE){
-        for(string word: word_set)
-            unique_words.push_back(word);
-        return unique_words;
-    }
-    else
-        return words;
+    return words;
 }
 
 

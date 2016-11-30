@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 {
     string correction;
 	cout << "Testing" << endl;
-    list<string> words = getWords("sample.txt", TEXT_MODE);
+    list<string> words = getWords("sample.txt");
     Text text(words);
     cout << "freq of " << argv[1] <<" " << text.getProportion(argv[1]) << endl;
     // test edit distance
