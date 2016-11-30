@@ -3,11 +3,6 @@
 
 using namespace std;
 
-#include <iostream>
-#include "libs.hpp"
-
-using namespace std;
-
 int main(int argc, char** argv)
 {
     string correction;

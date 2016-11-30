@@ -36,21 +36,12 @@ void createDict(std::string filename){
 	for(i=0; i<words.size(); i++){
 		dictionary.at(words.at(i).length()-1).insert(make_pair(words.at(i), words.at(i)));
 	}        
-
-	/*for(i=0; i<maxlen; i++){
-		if(dictionary.at(i).size() != 0){
-			for(auto it : dictionary.at(i)){
-					std::cout << it.first << std::endl;
-			}
-			std::cout << std::endl;
-		}
-	}*/
 }
 
 bool findWord(std::string word){
 	if(word.length() <= maxlen){
 		std::unordered_map<std::string,std::string>::iterator it;
-		if ((it = dictionary.at(word.length()-1).find(word)) != dictionary.at(word.length()-1).end()){// if the word is not the map
+		if ((it = dictionary.at(word.length()-1).find(word)) != dictionary.at(word.length()-1).end()){
 			return true;
 		} 
 	}
@@ -58,7 +49,6 @@ bool findWord(std::string word){
 }
 
 std::list<std::string> withinTwoEdits(std::string word){
-	//if iteration of unordered maps possible, can still do this part easily
 	int i, numRowStart, numRowEnd;
 	std::list<std::string> candidates;
 	int wordLength = word.length();
@@ -97,7 +87,7 @@ std::list<std::string> withinTwoEdits(std::string word){
 std::string findCorrection(std::string word){
 	//std::string correction;
 	std::list<std::string> candidates;
-	if(word.length() <= maxlen){
+	if(word.length() <= maxlen+2){
 		candidates = withinTwoEdits(word);
 		//std::cout << candidates.size() << std::endl;
 		return candidates.front();
