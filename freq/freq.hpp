@@ -16,20 +16,17 @@
 class Text{
     // Inner class def
     private:
-        struct Word{
-            std::string value;
-            int count;
-        };
-    private:
         int size;
     // private methods
     private:
-        std::unordered_map<std::string, Word> words;
+        std::unordered_map<std::string, int> count_map;
+        std::list<std::string> words;
         void insertWord(const std::string word);
 
     public:
         Text(const std::list<std::string>& words);
         double getProportion(const std::string& word);
+        std::list<std::string> getDictionary();
 
 };
 #endif

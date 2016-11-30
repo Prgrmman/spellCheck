@@ -16,18 +16,17 @@ Text::Text(const list<string>& words)
     } 
 }
 
-
 // adds word to hash
 // if word is already in hash, update it's count
 void Text::insertWord(const string word)
 {
-    unordered_map<string,Word>::iterator it;
-    if ((it = words.find(word)) == words.end()){ // if the word is not the map
-        Word newWord = {word, 1};
-        words.insert(make_pair(word,newWord)); // add it to the map
+    unordered_map<string,int>::iterator it;
+    if ((it = count_map.find(word)) == count_map.end()){ // if the word is not the map
+        words.push_back(word); // add it to the map
+        count_map.insert(make_pair(word,1));
     }
     else{
-       (it-> second).count ++;
+       (it-> second)++;
     }
     size++;
 }
@@ -36,9 +35,15 @@ void Text::insertWord(const string word)
 // returns -1 if the word is not in the text
 double Text::getProportion(const string& word)
 {
-    unordered_map<string,Word>::iterator it;
-    if ((it = words.find(word)) == words.end()){// if the word is not the map
+    unordered_map<string,int>::iterator it;
+    if ((it = count_map.find(word)) == count_map.end()){// if the word is not the map
         return -1;
     } 
-    return (it->second).count / (size * 1.0);
+    return it->second / (size * 1.0);
 }
+
+// returns a stripped linked list of internal dictionary
+list<string> Text::getDictionary()
+{
+    return words;
+} 
