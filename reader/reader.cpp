@@ -48,10 +48,10 @@ static list<string> processWords(const string& s)
 /*
  * returns true if word contains a digit
  */
-static bool containsNumber(const string& word)
+static bool invalidWord(const string& word)
 {
     for(char c: word)
-        if(isdigit(c))
+        if(isdigit(c) || c == '-')
             return true;
     return false;
 }
@@ -72,7 +72,7 @@ list<string> getWords(const string& filename)
     while(getline(file, line)){
         if (line.length() > 0){
             list<string> lineWords = processWords(line);
-            lineWords.remove_if(containsNumber);
+            lineWords.remove_if(invalidWord);
             words.insert(words.end(), lineWords.begin(), lineWords.end());
         }
     }

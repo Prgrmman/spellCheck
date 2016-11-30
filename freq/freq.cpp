@@ -47,3 +47,4 @@ list<string> Text::getDictionary()
 {
     return words;
 } 
+

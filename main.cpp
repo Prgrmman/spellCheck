@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 {
     string correction;
 	cout << "Testing" << endl;
-    list<string> words = getWords("sample.txt");
+    list<string> words = getWords("big.txt");
     Text text(words);
     cout << "freq of " << argv[1] <<" " << text.getProportion(argv[1]) << endl;
     // test edit distance
@@ -21,5 +21,10 @@ int main(int argc, char** argv)
 	cout << correction << endl;
 	correction = findCorrection("aaab");
 	cout << correction << endl;
+
+    cout << "Test of Text\n";
+    list<string> stuff = text.getDictionary();
+    for(string s : stuff)
+        cout << s << endl;
     return 0;
 }
