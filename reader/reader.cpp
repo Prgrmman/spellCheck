@@ -50,6 +50,8 @@ static list<string> processWords(const string& s)
  */
 static bool invalidWord(const string& word)
 {
+    if (word.length() == 1 && (word != "a" || word != "i"))
+        return true;
     for(char c: word)
         if(isdigit(c) || c == '-')
             return true;
