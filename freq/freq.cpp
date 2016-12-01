@@ -7,6 +7,11 @@ using namespace std;
  * Implementation of Text object
  */
 
+ //Default Constructor
+ Text::Text(){
+	 size = 0;
+ }
+ 
 // Constructor
 Text::Text(const list<string>& words)
 {

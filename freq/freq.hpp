@@ -24,6 +24,7 @@ class Text{
         void insertWord(const std::string word);
 
     public:
+		Text();
         Text(const std::list<std::string>& words);
         double getProportion(const std::string& word);
         std::list<std::string> getDictionary();

@@ -4,37 +4,35 @@
 #include <vector>
 #include <iterator>
 #include <unordered_map>
-#include "../editDist/editDist.hpp"
-#include "../reader/reader.hpp"
-#include "../freq/freq.hpp"
+#include "libs.hpp"
 
 static std::vector<std::unordered_map<std::string,std::string> > dictionary;
+static Text reference;
 static int maxlen;
 
 void createDict(std::string filename){
 	std::string currWord;
-	std::vector<std::string> words;
-	int currlen;
-	int i;
+	std::list<std::string>::iterator it;
+	int currlen, i;
+	
+	std::list<std::string> words = getWords(filename);
+    Text text(words);
+	reference = text;
 	
 	maxlen=0;
-	std::ifstream testfile(filename);
-	while(testfile >> currWord){
-		currlen = currWord.length();
-		if(currlen > maxlen){
-			maxlen = currlen;
+	for(it = words.begin(); it != words.end(); it++){
+		if((*it).length() > maxlen){
+			maxlen = (*it).length();
 		}
-		words.push_back(currWord);
 	}
-	testfile.close();
 	
 	for(i=0; i<maxlen; i++){
 		std::unordered_map<std::string,std::string> temp;
 		dictionary.push_back(temp);
 	}
 	
-	for(i=0; i<words.size(); i++){
-		dictionary.at(words.at(i).length()-1).insert(make_pair(words.at(i), words.at(i)));
+	for(it = words.begin(); it != words.end(); it++){
+		dictionary.at((*it).length()-1).insert(make_pair((*it), (*it)));
 	}        
 }
 
@@ -85,12 +83,21 @@ std::list<std::string> withinTwoEdits(std::string word){
 }
 
 std::string findCorrection(std::string word){
-	//std::string correction;
+	std::string correction;
 	std::list<std::string> candidates;
+	std::list<std::string>::iterator it;
 	if(word.length() <= maxlen+2){
 		candidates = withinTwoEdits(word);
-		//std::cout << candidates.size() << std::endl;
-		return candidates.front();
+		if(candidates.size() == 0){
+			return "not found";
+		}
+		correction = candidates.front();
+		for(it=candidates.begin(); it != candidates.end(); it++){
+			if(reference.getProportion(*it) > reference.getProportion(correction)){
+				correction = *it;
+			}
+		}
+		return correction;
 	}
 	return "Not found";
 }

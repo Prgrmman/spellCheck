@@ -1,13 +1,20 @@
 #include <iostream>
-#include "libs.hpp"
+#include "dictOperations/dictOperations.hpp"
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
     string correction;
+	string wordToCorrect = argv[1];
+	string dictName = argv[2];
+	createDict(dictName);
+	correction = findCorrection(wordToCorrect);
+	cout << correction << endl;
+	
+	/*string correction;
 	cout << "Testing" << endl;
-    list<string> words = getWords("big.txt");
+    list<string> words = getWords(filename);
     Text text(words);
     cout << "freq of " << argv[1] <<" " << text.getProportion(argv[1]) << endl;
     // test edit distance
@@ -20,7 +27,7 @@ int main(int argc, char** argv)
 	correction = findCorrection("aaron");
 	cout << correction << endl;
 	correction = findCorrection("aaab");
-	cout << correction << endl;
+	cout << correction << endl;*/
 
     return 0;
 }
