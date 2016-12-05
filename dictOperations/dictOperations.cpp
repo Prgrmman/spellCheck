@@ -87,7 +87,6 @@ std::list<std::pair<std::string, int> > withinTwoEdits(std::string word){
 }
 
 std::string findCorrection(std::string word){
-	std::string correction;
     std::pair<std::string, int> correctPair;
     std::list<std::pair<std::string, int> > candidates;
     std::list<std::pair<std::string, int> >::iterator it;
@@ -103,11 +102,10 @@ std::string findCorrection(std::string word){
 			correctPair = candidates.front();
 			for(it=candidates.begin(); it != candidates.end(); it++){
 				if(reference.getProportion((*it).first, (*it).second) > reference.getProportion(correctPair.first, correctPair.second)){
-					correction = (*it).first;	
 					correctPair = *it;
 				}
 			}
-			return correction;
+			return correctPair.first;
 		}
     }
     return "Not found";
