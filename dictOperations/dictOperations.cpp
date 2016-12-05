@@ -59,7 +59,6 @@ std::list<std::pair<std::string, int> > withinTwoEdits(std::string word){
         return candidates;
     }
     else{
-        //Design chiace here
         if(wordLength <= 2){
             numRowStart = 1;
             numRowEnd = wordLength+2;
@@ -86,14 +85,6 @@ std::list<std::pair<std::string, int> > withinTwoEdits(std::string word){
         return candidates;
     }
 }
-/*
- * Dear Casey,
- *      I think we need to make a small change here. We need to give
- *      words with the smaller edit distance a higher weight.
- *      One possible suggestion:
- *      -> if the word has and edit distance of 2, divide
- *          it's proportion by 2
- */
 
 std::string findCorrection(std::string word){
 	std::string correction;
@@ -107,8 +98,7 @@ std::string findCorrection(std::string word){
         }
         correctPair = candidates.front();
         for(it=candidates.begin(); it != candidates.end(); it++){
-            std::cout << (*it).first << " " << (*it).second << " " << reference.getProportion((*it).first, (*it).second) << std::endl;
-			if(reference.getProportion((*it).first, (*it).second) > reference.getProportion(correctPair.first, correctPair.second)){
+        	if(reference.getProportion((*it).first, (*it).second) > reference.getProportion(correctPair.first, correctPair.second)){
                 correction = (*it).first;	
 				correctPair = *it;
             }
