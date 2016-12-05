@@ -96,14 +96,19 @@ std::string findCorrection(std::string word){
         if(candidates.size() == 0){
             return "not found";
         }
-        correctPair = candidates.front();
-        for(it=candidates.begin(); it != candidates.end(); it++){
-        	if(reference.getProportion((*it).first, (*it).second) > reference.getProportion(correctPair.first, correctPair.second)){
-                correction = (*it).first;	
-				correctPair = *it;
-            }
-        }
-        return correction;
+		else if(candidates.size() == 1){
+			return candidates.front().first;
+		}
+		else{
+			correctPair = candidates.front();
+			for(it=candidates.begin(); it != candidates.end(); it++){
+				if(reference.getProportion((*it).first, (*it).second) > reference.getProportion(correctPair.first, correctPair.second)){
+					correction = (*it).first;	
+					correctPair = *it;
+				}
+			}
+			return correction;
+		}
     }
     return "Not found";
 }
