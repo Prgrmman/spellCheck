@@ -45,7 +45,7 @@ double Text::getProportion(const string& word, int dist)
         return -1;
     }
     if (dist == 0) return 1; 
-    return it->second / (size * dist);
+    else return it->second / (size * dist);
 }
 
 
