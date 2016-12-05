@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <iterator>
+#include <utility>
 #include <unordered_map>
 #include "libs.hpp"
 
@@ -46,13 +47,15 @@ bool findWord(std::string word){
     return false;
 }
 
-std::list<std::string> withinTwoEdits(std::string word){
-    int i, numRowStart, numRowEnd;
-    std::list<std::string> candidates;
+std::list<std::pair<std::string, int> > withinTwoEdits(std::string word){
+    int i, numRowStart, numRowEnd, editDist;
+	std::pair<std::string, int> candidate;
+    std::list<std::pair<std::string, int> > candidates;
     int wordLength = word.length();
     bool found = findWord(word);
     if(found){
-        candidates.push_back(word);
+		candidate = std::make_pair(word, 0);
+        candidates.push_back(candidate);
         return candidates;
     }
     else{
@@ -72,8 +75,10 @@ std::list<std::string> withinTwoEdits(std::string word){
         for(i=numRowStart; i<numRowEnd; i++){
             if(dictionary.at(i-1).size() != 0){
                 for(auto it : dictionary.at(i-1)){
-                    if(editDistance(word,it.first) <= 2){
-                        candidates.push_back(it.first);
+					editDist = editDistance(word,it.first);
+                    if(editDist <= 2){
+						candidate = std::make_pair(it.first, editDist);
+                        candidates.push_back(candidate);
                     }
                 }
             }
@@ -91,18 +96,21 @@ std::list<std::string> withinTwoEdits(std::string word){
  */
 
 std::string findCorrection(std::string word){
-    std::string correction;
-    std::list<std::string> candidates;
-    std::list<std::string>::iterator it;
+	std::string correction;
+    std::pair<std::string, int> correctPair;
+    std::list<std::pair<std::string, int> > candidates;
+    std::list<std::pair<std::string, int> >::iterator it;
     if(word.length() <= maxlen+2){
         candidates = withinTwoEdits(word);
         if(candidates.size() == 0){
             return "not found";
         }
-        correction = candidates.front();
+        correctPair = candidates.front();
         for(it=candidates.begin(); it != candidates.end(); it++){
-            if(reference.getProportion(*it) > reference.getProportion(correction)){
-                correction = *it;
+            std::cout << (*it).first << " " << (*it).second << " " << reference.getProportion((*it).first, (*it).second) << std::endl;
+			if(reference.getProportion((*it).first, (*it).second) > reference.getProportion(correctPair.first, correctPair.second)){
+                correction = (*it).first;	
+				correctPair = *it;
             }
         }
         return correction;
