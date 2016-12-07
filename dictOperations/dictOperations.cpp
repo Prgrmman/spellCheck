@@ -71,11 +71,11 @@ std::list<std::pair<std::string, int> > withinTwoEdits(std::string word){
             numRowStart = wordLength-2;
             numRowEnd = wordLength+2;
         }
-        for(i=numRowStart; i<numRowEnd; i++){
+        for(i=numRowStart; i<=numRowEnd; i++){
             if(dictionary.at(i-1).size() != 0){
                 for(auto it : dictionary.at(i-1)){
 					editDist = editDistance(word,it.first);
-                    if(editDist <= 2){
+					if(editDist <= 2){
 						candidate = std::make_pair(it.first, editDist);
                         candidates.push_back(candidate);
                     }
