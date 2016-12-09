@@ -49,12 +49,12 @@ bool findWord(std::string word){
 
 std::list<std::pair<std::string, int> > withinTwoEdits(std::string word){
     int i, numRowStart, numRowEnd, editDist;
-	std::pair<std::string, int> candidate;
+    std::pair<std::string, int> candidate;
     std::list<std::pair<std::string, int> > candidates;
     int wordLength = word.length();
     bool found = findWord(word);
     if(found){
-		candidate = std::make_pair(word, 0);
+        candidate = std::make_pair(word, 0);
         candidates.push_back(candidate);
         return candidates;
     }
@@ -74,9 +74,9 @@ std::list<std::pair<std::string, int> > withinTwoEdits(std::string word){
         for(i=numRowStart; i<=numRowEnd; i++){
             if(dictionary.at(i-1).size() != 0){
                 for(auto it : dictionary.at(i-1)){
-					editDist = editDistance(word,it.first);
-					if(editDist <= 2){
-						candidate = std::make_pair(it.first, editDist);
+                    editDist = editDistance(word,it.first);
+                    if(editDist <= 2){
+                        candidate = std::make_pair(it.first, editDist);
                         candidates.push_back(candidate);
                     }
                 }
@@ -95,18 +95,18 @@ std::string findCorrection(std::string word){
         if(candidates.size() == 0){
             return "not found";
         }
-		else if(candidates.size() == 1){
-			return candidates.front().first;
-		}
-		else{
-			correctPair = candidates.front();
-			for(it=candidates.begin(); it != candidates.end(); it++){
-				if(reference.getProportion((*it).first, (*it).second) > reference.getProportion(correctPair.first, correctPair.second)){
-					correctPair = *it;
-				}
-			}
-			return correctPair.first;
-		}
+        else if(candidates.size() == 1){
+            return candidates.front().first;
+        }
+        else{
+            correctPair = candidates.front();
+            for(it=candidates.begin(); it != candidates.end(); it++){
+                if(reference.getProportion((*it).first, (*it).second) > reference.getProportion(correctPair.first, correctPair.second)){
+                    correctPair = *it;
+                }
+            }
+            return correctPair.first;
+        }
     }
     return "Not found";
 }

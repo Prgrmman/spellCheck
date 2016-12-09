@@ -1,39 +1,7 @@
 #include "editDist.hpp"
 /**
- *
- * Algorithm idea:
- * -> Return the edit distance between two strings
- *
- * A single edit is defined as:
- * -> inserting a character
- * -> removing a character
- * -> substituting a character
- * Each edit has a cost of 1
- *
- * For any two given strings, we return the minimum number edits needed
- * to make the strings equivalent.
- *
- * Consider str1 and str2
- * let xi be the ith position in str1
- * let yj be the jth position in str2
- * Observations:
- * -> if str1 is empty, then we need to insert all of the characters from str2
- * -> if str2 is empty, then we need to insert all of the characters from str1
- * -> deleting a character from one string is the same as inserting it on the other
- *
- *
- * recurrence relationship:
- *              _
- *             | 
- *             | 0                                              if i = 0 and j = 0
- *             | j                                              if i = 0 and j != 0
- *   D[i,j] =  | i                                              if j = 0 and i != 0
- *             | min {D[i-1][j]+1, 
- *             |     D[i][j-1] +1, D[i-1][j-1] + replaceCost}   otherwise
- *             |_
- *
- *
- * time complexity: O(n^2)
+ * Dynamic programming implementation of
+ * Levenshtein distance
  **/
 
 using namespace std;
