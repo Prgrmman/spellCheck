@@ -25,11 +25,11 @@
 
 *SAMPLE OUTPUT:*
 * Word: Understnd
-* Understand
+..* Understand
 * Word: Hellio
-* Hello
+..* Hello
 * Word: Hi
-* Hi
+..* Hi
 
 *TO RUN:*
 ```
