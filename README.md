@@ -19,12 +19,9 @@
 *FILES:* main.cpp big.txt Readme.txt Makefile freq.cpp freq.hpp reader.cpp reader.hpp editDist.cpp editDist.hpp dictOperations.cpp dictOperations.hpp libs.hpp
 
 *SAMPLE OUTPUT:*
-* Word: Understnd
-..* Understand
-* Word: Hellio
-..* Hello
-* Word: Hi
-..* Hi
+* Word: Understnd -> Understand
+* Word: Hellio -> Hello 
+* Word: Hi -> Hi
 
 *TO RUN:*
 ```
